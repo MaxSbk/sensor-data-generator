@@ -1,0 +1,27 @@
+# MQTT configurations
+mqtt:
+  url: "tcp://localhost:1883"
+  client-id: "data-generator"
+  topic: "topic-1"
+  qos: 2
+
+sensors:
+  - id: "SENSOR_1"
+    type: "TYPE_1"
+    machine-id: "Machine_1"
+    part-id: "Part_1"
+    tool-id: "Tool_1"
+    unit: "C"
+    generator:
+      values:
+        min: 100.0
+        max: 200.0
+      interval: 1000
+      extra_below_values:
+        freq: 5
+        percentage_deviation: 25
+        duration: 5
+      extra_above_values:
+        freq: 5
+        percentage_deviation: 25
+        duration: 3

@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  mqtt:
+    image: eclipse-mosquitto:2.0.14
+    ports:
+      - '1883:1883'
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+    networks:
+      - mqtt_net
+
+  sensor-data-generator:
+    build:
+      context: ../
+      dockerfile: ./build/Dockerfile
+    networks:
+      - mqtt_net
+    environment:
+      MQTT_URL: 'tcp://mqtt:1883'
+    depends_on:
+      - mqtt
+networks:
+  mqtt_net: null
